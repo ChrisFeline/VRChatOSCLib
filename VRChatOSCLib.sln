@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRChatOSCLib", "VRChatOSCLib\VRChatOSCLib.csproj", "{FCDD1787-4954-4E78-9599-C10EF49E59B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VRChatOSCLib", "VRChatOSCLib\VRChatOSCLib.csproj", "{FCDD1787-4954-4E78-9599-C10EF49E59B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRChatOSCTest", "VRChatOSCTest\VRChatOSCTest.csproj", "{40F276E9-C724-46D0-BBCA-F0E567A14A7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VRChatOSCTest", "VRChatOSCTest\VRChatOSCTest.csproj", "{40F276E9-C724-46D0-BBCA-F0E567A14A7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

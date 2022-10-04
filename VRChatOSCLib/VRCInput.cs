@@ -4,8 +4,10 @@ using System.Text;
 
 namespace VRChatOSCLib
 {
+    /// <summary>Base interface for VRCInput.</summary>
     public interface IVRCInput
     {
+        /// <summary>Get the raw string value from this Input.</summary>
         string Value { get; }
     }
 
@@ -16,6 +18,7 @@ namespace VRChatOSCLib
     public struct VRCAxes : IVRCInput
     {
         private VRCAxes(string value) => Value = value;
+        /// <summary>Get the raw string value from this Input.</summary>
         public string Value { get; private set; }
 
         /// <summary>Move forwards (1) or Backwards (-1)</summary>
@@ -45,6 +48,7 @@ namespace VRChatOSCLib
     public struct VRCButton : IVRCInput
     {
         private VRCButton(string value) => Value = value;
+        /// <summary>Get the raw string value from this Input.</summary>
         public string Value { get; private set; }
 
         /// <summary>Move forward while this is 1.</summary>

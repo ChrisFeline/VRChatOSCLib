@@ -54,7 +54,7 @@
         /// <returns>Value at the supplied index.</returns>
         public T GetValueAt<T>(int index) => (T)Original[index];
 
-        public VRCMessage(OscCore.OscMessage message)
+        internal VRCMessage(OscCore.OscMessage message)
         {
             Original = message;
             Address = message.Address;
@@ -70,6 +70,8 @@
             else Type = MessageType.Unknown;
         }
 
+        /// <summary>Returns a string that represents the current object.</summary>
+        /// <returns>A string that represents the current object.</returns>
         public override string ToString() => Original.ToString();
 
         /// <summary>Print this message's content to the console.</summary>

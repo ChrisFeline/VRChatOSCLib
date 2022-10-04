@@ -202,6 +202,7 @@ namespace VRChatOSCLib
             }
         }
 
+        /// <summary>Release all resources used by this class.</summary>
         public void Dispose()
         {
             if (m_Disposed) return;
