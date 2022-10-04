@@ -3,7 +3,7 @@
 
 ## Usage
 ##### These examples are for usage demonstrations... do not just copy-paste.
-###### `Or do. I am a programmer, not a cop.`
+###### Or do. I am a programmer, not a cop.
 
 ### Namespace
 ```cs
