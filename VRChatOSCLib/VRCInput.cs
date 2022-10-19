@@ -27,6 +27,8 @@ namespace VRChatOSCLib
         public static VRCAxes Horizontal => new VRCAxes("/input/Horizontal");
         /// <summary>Look Left and Right. Smooth in Desktop, VR will do a snap-turn when the value is 1 if Comfort Turning is on.</summary>
         public static VRCAxes LookHorizontal => new VRCAxes("/input/LookHorizontal");
+        /// <summary>Look Up and Down.<summary>
+        public static VRCAxes LookVertical => new VRCAxes("/input/LookVertical");
         /// <summary>Use held item - not sure if this works</summary>
         public static VRCAxes UseAxisRight => new VRCAxes("/input/UseAxisRight");
         /// <summary>Grab item - not sure if this works</summary>
