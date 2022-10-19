@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using VRChatOSCLib;
+﻿using VRChatOSCLib;
 
 internal class Program
 {
