@@ -1,4 +1,5 @@
-﻿using VRChatOSCLib;
+﻿using System.Diagnostics;
+using VRChatOSCLib;
 
 internal class Program
 {
@@ -50,6 +51,7 @@ internal class Program
 
         // Subscribe to incoming messages
         osc.OnMessage += OnMessageReceived;
+        Console.WriteLine($"OSC Initialized:\n                         Remote: {osc.RemoteEndPoint}\n                         Local: {osc.LocalEndPoint}");
 
         Console.ReadKey(true); // :P
     }

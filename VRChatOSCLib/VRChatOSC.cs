@@ -84,6 +84,8 @@ namespace VRChatOSCLib
             LocalEndPoint = new IPEndPoint(IPAddress.Any, localPort);
 
             m_Server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp) { ReceiveTimeout = int.MaxValue };
+            // Allow other processes to reuse this ip-address/port pair.
+            m_Server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
             m_Server.Bind(LocalEndPoint);
 
             m_Thread = new Thread(Serve);
