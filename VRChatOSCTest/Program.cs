@@ -29,8 +29,9 @@ internal class Program
 
 
         // Send Chatbox Messages
-        osc.SendChatbox("Hello World"); // Sends the ASCII string to the Keyboard
-        osc.SendChatbox("Hello World", true); // Bypass keyboard and sends string to Chatbox
+        osc.SendChatbox("Hello World 1"); // Sends the string to the Keyboard
+        osc.SendChatbox("Hello World 2", true); // Bypass keyboard and sends string to Chatbox
+        osc.SendChatbox("Hello World 3", true, true); // Sends a string to the Chatbox and plays message SFX on VRC
 
         osc.SendChatbox(true); // Set typing indicator ON
         osc.SendChatbox(false); // Set typing indicator OFF

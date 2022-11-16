@@ -34,30 +34,39 @@ namespace VRChatOSCLib
         /// <summary>EventsHandler invoked on receiving VRChat OSC messages such as avatar parameters.</summary>
         public EventHandler<VRCMessage>? OnMessage;
 
+        #region Constructor
         /// <summary>
         /// Initialize and instance of this object.<para />
         /// You will need to call Connect() to send data.
         /// </summary>
         public VRChatOSC() { }
+
         /// <summary>
         /// Initialize and instance of this object.<para />
         /// Optionally auto connect to send data.
         /// </summary>
         public VRChatOSC(bool connect) : this() { if (connect) Connect(); }
+
         /// <param name="remotePort">The remote port used by VRChat to receive data we send to the Client.</param>
         public VRChatOSC(int remotePort = 9000) : this() => Connect(remotePort);
+
         /// <param name="ipAddress">The remote IPAddress where VRChat is located and receiving data.</param>
         /// <param name="remotePort">The remote port used by VRChat to receive data we send to the Client.</param>
         public VRChatOSC(string ipAddress, int remotePort = 9000) : this() => Connect(ipAddress, remotePort);
+
         /// <param name="ipAddress">The remote IPAddress where VRChat is located and receiving data.</param>
         /// <param name="remotePort">The remote port used by VRChat to receive data we send to the Client.</param>
         public VRChatOSC(IPAddress ipAddress, int remotePort = 9000) : this() => Connect(ipAddress, remotePort);
+        #endregion
 
+        #region Connection
         /// <param name="remotePort">The remote port used by VRChat to receive data we send to the Client.</param>
         public void Connect(int remotePort = 9000) => Connect(IPAddress.Loopback, remotePort);
+
         /// <param name="ipAddress">The remote IPAddress where VRChat is located and receiving data.</param>
         /// <param name="remotePort">The remote port used by VRChat to receive data we send to the Client.</param>
         public void Connect(string ipAddress, int remotePort = 9000) => Connect(IPAddress.Parse(ipAddress), remotePort);
+
         /// <param name="ipAddress">The remote IPAddress where VRChat is located and receiving data.</param>
         /// <param name="remotePort">The remote port used by VRChat to receive data we send to the Client.</param>
         public void Connect(IPAddress ipAddress, int remotePort = 9000)
@@ -95,7 +104,10 @@ namespace VRChatOSCLib
 
             m_Listening = true;
         }
+        #endregion
 
+
+        #region Methods
         /// <summary>Sends a raw OSC Packet.</summary>
         /// <param name="packet">Raw OSC Packet.</param>
         /// <exception cref="ObjectDisposedException"></exception>
@@ -108,26 +120,32 @@ namespace VRChatOSCLib
             var data = packet.ToByteArray();
             _ = m_Client.Send(data);
         }
+
         /// <summary>Send an array of objects to an address.</summary>
         /// <param name="address">Address</param>
         /// <param name="args">Object Parameters</param>
         public void SendTo(string address, params object[] args) => Send(new OscMessage(address, args));
+
         /// <summary>Sends an Integer value to an Avatar parameter.</summary>
         /// <param name="name">The name of the Avatar parameter.</param>
         /// <param name="value">The value sent to this parameter.</param>
         public void SendParameter(string name, int value) => SendTo($"{avatar_parameters_address}/{name}", value);
+
         /// <summary>Sends an Float value to an Avatar parameter.</summary>
         /// <param name="name">The name of the Avatar parameter.</param>
         /// <param name="value">The value sent to this parameter.</param>
         public void SendParameter(string name, float value) => SendTo($"{avatar_parameters_address}/{name}", value);
+
         /// <summary>Sends an Boolean value to an Avatar parameter.</summary>
         /// <param name="name">The name of the Avatar parameter.</param>
         /// <param name="value">The value sent to this parameter.</param>
         public void SendParameter(string name, bool value) => SendTo($"{avatar_parameters_address}/{name}", value);
+
         /// <summary>Toggles a referenced Boolean value and sends it to an Avatar parameter.</summary>
         /// <param name="name">The name of the Avatar parameter.</param>
         /// <param name="value">The referenced value to toggle.</param>
         public void SendParameter(string name, ref bool value) => SendParameter(name, value = !value);
+
 
         /// <summary>Send inputs to VRChat and control things such as locomotion.</summary>
         /// <param name="input">Any VRCInput that inherits the IVRCInput interface.</param>
@@ -136,6 +154,7 @@ namespace VRChatOSCLib
         /// An int (0, 1) for buttons.
         /// </param>
         public void SendInput(IVRCInput input, object value) => SendTo(input.Value, value);
+
         /// <summary>
         /// Send Axes input to VRChat.<para />
         /// Axes expect a float from -1 to 1 to control things like movement.<para />
@@ -144,6 +163,7 @@ namespace VRChatOSCLib
         /// <param name="input">A VRCAxes property, for example: VRCAxes.Vertical</param>
         /// <param name="value">Value from -1f to 1f</param>
         public void SendInput(VRCAxes input, float value) => SendTo(input.Value, value);
+
         /// <summary>
         /// Send Button input to VRChat.<para />
         /// TRUE for 'pressed' and FALSE for 'released'.<para />
@@ -152,6 +172,7 @@ namespace VRChatOSCLib
         /// <param name="input">A VRCButton property, for example: VRCButton.Jump</param>
         /// <param name="value">Value true/false</param>
         public void SendInput(VRCButton input, bool value) => SendTo(input.Value, value ? 1 : 0);
+
         /// <summary>
         /// Send input to VRChat.<para />
         /// Do not use full paths.
@@ -163,16 +184,20 @@ namespace VRChatOSCLib
         /// </param>
         public void SendInput(string input, object value) => SendTo(input_address + input, value);
 
+
         /// <summary>
         /// Sends a message to the VRChat Chatbox.<para />
         /// The string must be ASCII text, and is what will appear in the chatbox.
         /// </summary>
         /// <param name="text">ASCII string to send.</param>
         /// <param name="bypassKeyboard">If true, bypass the VRChat Keyboard and send the string directly to the chatbox.</param>
-        public void SendChatbox(string text, bool bypassKeyboard = false) => SendTo(chatbox_input_address, text, bypassKeyboard);
+        /// <param name="messageComplete">Used to trigger chatbox notification SFX.</param>
+        public void SendChatbox(string text, bool bypassKeyboard = false, bool messageComplete = true) => SendTo(chatbox_input_address, text, bypassKeyboard, messageComplete);
+
         /// <summary>Toggle the typing indicator on and off.</summary>
         /// <param name="typing">Indicator state.</param>
         public void SendChatbox(bool typing) => SendTo(chatbox_typing_address, typing);
+        #endregion
 
         private void Serve()
         {
