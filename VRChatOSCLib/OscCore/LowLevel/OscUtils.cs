@@ -164,10 +164,10 @@ namespace OscCore.LowLevel
                     obj is string ||
                     obj is OscSymbol)
                 {
-                    string value = obj.ToString();
+                    string value = obj.ToString() ?? string.Empty;
 
                     // string and terminator
-                    size += value.Length + 1;
+                    size += System.Text.Encoding.UTF8.GetByteCount(value) + 1;
 
                     // padding 
                     nullCount = 4 - size % 4;
